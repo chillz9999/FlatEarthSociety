@@ -1,0 +1,345 @@
+@import 'tailwindcss';
+@import '@fontsource/cinzel/400.css';
+@import '@fontsource/cinzel/600.css';
+@import '@fontsource/cinzel/700.css';
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/500.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+@import '@fontsource/cormorant-garamond/600.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+
+@theme {
+  --color-ink: #0d0b08;
+  --color-ink-2: #16120d;
+  --color-ink-3: #211a12;
+  --color-bronze: #8c5a2b;
+  --color-bronze-2: #a8743d;
+  --color-gold: #c9a24a;
+  --color-gold-2: #e6c56f;
+  --color-gold-3: #f2d57e;
+  --color-parchment: #e8dcc0;
+  --color-parchment-2: #cdbd98;
+  --color-parchment-3: #a8987a;
+  --color-sea: #16343b;
+  --color-sea-2: #24505a;
+  --color-ember: #b5532f;
+  --color-verdigris: #6fa39a;
+
+  --font-display: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --font-serif: 'Cormorant Garamond', Garamond, Georgia, serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  --rope: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%233a2814'/%3E%3Cg stroke-linecap='round' fill='none'%3E%3Cpath d='M-4 16 L8 4 M2 22 L14 10 M8 28 L20 16 M14 34 L26 22 M-10 10 L2 -2 M20 4 L26 -2' stroke='%23c9a24a' stroke-width='3.2'/%3E%3Cpath d='M-4 16 L8 4 M2 22 L14 10 M8 28 L20 16 M14 34 L26 22 M-10 10 L2 -2 M20 4 L26 -2' stroke='%23f2d57e' stroke-width='1' transform='translate(-1 -1)'/%3E%3C/g%3E%3C/svg%3E");
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.8 0 0 0 0 0.6 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+html,
+body {
+  background: var(--color-ink);
+  color: var(--color-parchment);
+  font-family: var(--font-serif);
+  /* Full-height figures everywhere: old-style ones make "$0.10" read like "$0.1o". */
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse at 50% -10%, rgba(140, 90, 43, 0.18), transparent 60%),
+    radial-gradient(ellipse at 50% 120%, rgba(22, 52, 59, 0.35), transparent 60%),
+    var(--grain);
+  background-attachment: fixed;
+}
+
+/* A voyage under way: no pointer anywhere on the page (see GameStage). */
+html.sailing,
+html.sailing * {
+  cursor: none !important;
+}
+
+::selection {
+  background: rgba(201, 162, 74, 0.35);
+}
+
+@layer components {
+  .font-display {
+    letter-spacing: 0.08em;
+  }
+
+  /* A bronze plaque: dark panel with a double engraved border. */
+  .plaque {
+    position: relative;
+    background:
+      linear-gradient(180deg, rgba(33, 26, 18, 0.92), rgba(16, 12, 8, 0.95)),
+      var(--grain);
+    border: 1px solid rgba(201, 162, 74, 0.45);
+    box-shadow:
+      inset 0 0 0 3px rgba(13, 11, 8, 0.9),
+      inset 0 0 0 4px rgba(140, 90, 43, 0.55),
+      0 18px 40px -20px rgba(0, 0, 0, 0.9);
+  }
+
+  .plaque::before,
+  .plaque::after {
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: var(--color-gold);
+    transform: rotate(45deg);
+    top: -4px;
+    box-shadow: 0 0 6px rgba(201, 162, 74, 0.6);
+  }
+  .plaque::before {
+    left: 14px;
+  }
+  .plaque::after {
+    right: 14px;
+  }
+
+  /* Rope border, as on the Society's coin. */
+  .rope {
+    border: 9px solid transparent;
+    border-image: var(--rope) 8 round;
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.8),
+      0 24px 60px -24px rgba(0, 0, 0, 0.95);
+  }
+
+  .engraved {
+    color: var(--color-gold-2);
+    text-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.8),
+      0 0 18px rgba(201, 162, 74, 0.18);
+  }
+
+  .rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201, 162, 74, 0.6), transparent);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.85rem 1.6rem;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease,
+      color 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+  .btn-sm {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    padding: 0.6rem 1.1rem;
+  }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .btn-gold {
+    color: #1a1208;
+    background: linear-gradient(180deg, #f2d57e, #c9a24a 55%, #9c7430);
+    border: 1px solid #f7e2a1;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -2px 0 rgba(90, 60, 15, 0.5),
+      0 10px 28px -10px rgba(201, 162, 74, 0.55);
+  }
+  .btn-gold:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.6),
+      inset 0 -2px 0 rgba(90, 60, 15, 0.5),
+      0 14px 34px -10px rgba(242, 213, 126, 0.7);
+  }
+  .btn-ghost {
+    color: var(--color-gold-2);
+    border: 1px solid rgba(201, 162, 74, 0.55);
+    background: rgba(13, 11, 8, 0.6);
+  }
+  .btn-ghost:not(:disabled):hover {
+    background: rgba(201, 162, 74, 0.12);
+    color: var(--color-gold-3);
+  }
+
+  .label {
+    font-family: var(--font-display);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    color: var(--color-parchment-3);
+  }
+
+  /* Figures in the Society's serif: full-height, and every digit the same width, so a running score never jitters. */
+  .num {
+    font-family: var(--font-serif);
+    font-variant-numeric: lining-nums tabular-nums;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.25s ease;
+  }
+  .link-underline:hover,
+  .link-underline[aria-current='page'] {
+    background-size: 100% 1px;
+  }
+}
+
+@keyframes candle {
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 18px rgba(242, 213, 126, 0.35),
+      0 1px 0 #000;
+  }
+  45% {
+    opacity: 0.94;
+    text-shadow:
+      0 0 26px rgba(242, 213, 126, 0.5),
+      0 1px 0 #000;
+  }
+  70% {
+    opacity: 0.98;
+    text-shadow:
+      0 0 14px rgba(242, 213, 126, 0.28),
+      0 1px 0 #000;
+  }
+}
+.candle {
+  animation: candle 4.5s ease-in-out infinite;
+}
+
+@keyframes banner-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px);
+    letter-spacing: 0.5em;
+  }
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 0.3em;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.stage-banner {
+  animation: banner-in 3.6s ease forwards;
+}
+
+/* Points won, floating up beneath the score and fading. */
+@keyframes gain-rise {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(0.9);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -8px) scale(1);
+  }
+}
+.gain-rise {
+  animation: gain-rise 1s ease-out forwards;
+}
+
+/* A short call-out over the sea (a close call, a new personal best): pops in, holds, fades. */
+@keyframes callout {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 6px) scale(0.92);
+  }
+  12% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.06);
+  }
+  24% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -6px) scale(1);
+  }
+}
+.callout {
+  animation: callout 1.2s ease-out forwards;
+}
+
+/* A HUD figure that just changed for the better (the weekly rank climbing). */
+@keyframes hud-flash {
+  0% {
+    color: #fff3c4;
+    text-shadow: 0 0 14px rgba(242, 213, 126, 0.9);
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.hud-flash {
+  display: inline-block;
+  animation: hud-flash 0.8s ease-out;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  animation: fade-up 0.6s ease both;
+}
+
+@keyframes pulse-gold {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(201, 162, 74, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(201, 162, 74, 0);
+  }
+}
+.pulse-gold {
+  animation: pulse-gold 2.2s ease-in-out infinite;
+}

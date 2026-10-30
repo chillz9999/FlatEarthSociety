@@ -1,0 +1,21 @@
+{
+  "name": "flat-earth-society",
+  "private": true,
+  "version": "1.0.0",
+  "description": "The Flat Earth Society — The Society Test. A desktop arcade game on Robinhood Chain.",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @fes/game-core && npm run build -w @fes/server && npm run build -w @fes/web",
+    "test": "npm run test -w @fes/game-core && npm run test -w @fes/server",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "dev:web": "npm run dev -w @fes/web",
+    "dev:server": "npm run dev -w @fes/server",
+    "contracts:test": "cd contracts && forge test"
+  },
+  "engines": {
+    "node": ">=20.10"
+  }
+}

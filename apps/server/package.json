@@ -1,0 +1,35 @@
+{
+  "name": "@fes/server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Society's offices: auth, ranked sessions, replay verification, leaderboard, treasury and settlement.",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "esbuild src/index.ts --bundle --platform=node --target=node20 --format=esm --outfile=dist/index.js --packages=external --alias:@fes/game-core=../../packages/game-core/src/index.ts --alias:@fes/shared=../../packages/shared/src/index.ts && cp -r migrations dist/",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "e2e": "tsx e2e/onchain.e2e.ts",
+    "fees": "tsx scripts/fees.ts"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.12",
+    "@fastify/cors": "^11.3.1",
+    "@fastify/rate-limit": "^11.2.1",
+    "@fes/game-core": "1.0.0",
+    "@fes/shared": "1.0.0",
+    "fastify": "^5.12.7",
+    "pg": "^8.23.1",
+    "viem": "^2.57.11",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/pg": "^8.23.1",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.20.0",
+    "typescript": "~5.9.0",
+    "vitest": "^3.2.0"
+  }
+}

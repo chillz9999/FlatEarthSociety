@@ -1,0 +1,22 @@
+node_modules/
+dist/
+.next/
+out/
+coverage/
+*.log
+.env
+.env.local
+.env.*.local
+.DS_Store
+# foundry
+contracts/out/
+contracts/cache/
+contracts/broadcast/*/31337/
+# local postgres / pglite data
+.data/
+*.tsbuildinfo
+next-env.d.ts
+
+# local chain runtime files
+.anvil.pid
+.anvil.log
